@@ -1,4 +1,5 @@
 ﻿#  A mini IA-32 operating-system in <<Linux内核完全注释>>修正版V3.0
+#  Tested on Ubuntu 12.04.1(bochs 2.4.6)
 #
 #  change log:
 #  movl scr_loc, %bx => movl scr_loc, %ebx

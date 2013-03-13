@@ -1,9 +1,16 @@
 ﻿#  A mini IA-32 operating-system in <<Linux内核完全注释>>修正版V3.0
 #  Tested on Ubuntu 12.04.1(bochs 2.4.6)
 #
-#  change log:
+#  Run it:
+#  $ make
+#  $ bochs
+#
+#  Change log:
 #  movl scr_loc, %bx => movl scr_loc, %ebx
 #  movl $65, %al => movb $65, %al
 #  movl $66, %al => movb $66, %al
 #  align 2 => align 4
 #  align 3 => align 8
+#
+#  More:
+#  http://blog.csdn.net/voidccc

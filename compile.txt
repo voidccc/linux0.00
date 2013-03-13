@@ -1,9 +1,0 @@
-1 写好boot.s文件
-2 用nasm编译一下
-nasm boot.s -o boot.bin
-3 用cygwin的dd 这种读写工具将这个文件写到一张空白软盘的第一个扇区
-dd if=boot.bin of=boot.img  bs=512 count=1
-
-注意cygwin要搞定
-注意SuperOS.bxrc位于boche根文件下，而其他文件位于boche/mycode目录下
-

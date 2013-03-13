@@ -1,0 +1,27 @@
+﻿head.s修改点
+1 align 3 => align 8
+2 movb $66, %al => movl $66, %al
+
+===========================================
+(1)编译bootloader
+as86 -0 -a -o boot.o boot.s
+ld86 -0 -s -o boot boot.o
+
+(2)编译head
+gcc -m32 -g -Wall -O2 -fomit-frame-pointer -fno-stack-protector -traditional -c head.s
+此句用gcc编译head.s生成head.o，实际上gcc会调用as来汇编head.s
+ld head.o -m elf_i386 -Ttext 0 -e startup_32 -o system
+ld把head.o链接成system，启动代码段偏移从0开始，且把startup_32作为第一条指令.
+objcopy -O binary -R .note -R .comment system kernel
+ld生成的实际上是有文件头的文件，使用objcopy -O binary可以去掉文件头，同时-R去掉了文件中的指定段，生成kernel文件
+至此，kernel是head.s生成的纯二进制代码.
+
+(3)组合bootloader和head
+dd if=boot of=boot.img bs=32 skip=1
+生成boot到boot.img中，读写Block大小为32Byte，跳过输入文件的1个Block，也就是跳过了文件头.
+dd if=kernel of=boot.img bs=512 seek=1
+生成kernel到boot.img中，读写Block大小为512Byte，跳过输出文件的1个Block，也就是保留了boot.img中boot程序的512Byte，从512Byte后写入head程序kernel.
+至此，boot.img就是集合了bootloader和head的启动盘了，其中bootloader在前512Byte，head紧挨着bootloader.
+
+(4)执行
+bochs即可

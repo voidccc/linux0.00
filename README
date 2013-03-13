@@ -1,7 +1,7 @@
-﻿#  A mini IA-32 operating-system
-
-#  different from ebooks(head.s)
-#  movl scr_loc, %bx => movlscr_loc, %ebx
+﻿#  A mini IA-32 operating-system in <<Linux内核完全注释>>修正版V3.0
+#
+#  change log:
+#  movl scr_loc, %bx => movl scr_loc, %ebx
 #  movl $65, %al => movb $65, %al
 #  movl $66, %al => movb $66, %al
 #  align 2 => align 4
